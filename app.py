@@ -1,24 +1,21 @@
-import Pandas as pandas;
-import Chefboost as Chefboost;
+#Importing Dependencies
+import pandas as pandas;
+import chefboost as chef;
 
 
-
-def Build_DT(dataframe):
-    dataframe = pd.read_csv("./data/question.txt");
-    print(dataframe.head());
-    config ={'algorithm':'ID3'};
-    model = Chefboost.fit(dataframe,config);
-    ClassifyInstance(dataframe,model);
-
-
-def ClassifyInstance(dataframe):
+def ClassifyInstance(dataframe,config):
     for index,instance in dataframe.iterrows():
-            prediction = Chefboost.predict(model,instance)
+            model = chef.fit(dataframe,config);
+            prediction = chef.predict(model,instance)
             return(prediction);
 
 
+def Build_DT(dataframe):
+    print(dataframe.head());
+    config ={'algorithm':'ID3'};
+    ClassifyInstance(dataframe,config);
 
-dataframe = pd.read_csv("./data/question.txt");
+dataframe = pandas.read_csv("question.txt");
 Build_DT(dataframe);
 
 
